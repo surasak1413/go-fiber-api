@@ -9,8 +9,12 @@ import (
 	"github.com/google/uuid"
 )
 
-type AuthService interface {
+type AuthServiceAction interface {
 	Register(req request.AuthRequest) error
+}
+
+func (sv *service) AuthService() AuthServiceAction {
+	return sv
 }
 
 func (sv *service) Register(req request.AuthRequest) error {

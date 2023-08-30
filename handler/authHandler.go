@@ -30,8 +30,16 @@ func RegisterHandler(c *fiber.Ctx) error {
 		})
 	}
 
-	sv := services.NewService()
-	err := sv.Register(*req)
+	sv, err := services.NewService()
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(response.ErrorResponse{
+			Status:  fiber.StatusBadRequest,
+			Tag:     tag,
+			Message: "new Service error",
+			Error:   err.Error(),
+		})
+	}
+	err = sv.AuthService().Register(*req)
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(response.ErrorResponse{
 			Status:  fiber.StatusBadRequest,
