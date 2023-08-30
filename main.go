@@ -11,7 +11,7 @@ func main() {
 	// if err != nil {
 	// 	return
 	// }
-	// repository.NewStore(db)
+	// repository.NewStore(db)dd
 	app := fiber.New()
 	routes.Setup(app)
 
